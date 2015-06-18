@@ -1,37 +1,70 @@
-﻿namespace Business
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Databaseconnection.cs" company="Software">
+//   Mark B ©
+// </copyright>
+// <summary>
+//   The databaseconnection.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Business
 {
-    using Oracle.DataAccess.Client;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
+    using Oracle.DataAccess.Client;
+
+    /// <summary>
+    /// The connection.
+    /// </summary>
     public class Databaseconnection
     {
-        //The oracle connection used throughout the whole dbconnection.
+    // The oracle connection used throughout the whole dbconnection.
+
+        /// <summary>
+        /// The connection.
+        /// </summary>
         private readonly OracleConnection connection;
-        // Initialize the reader here so you can close it safely.
+        
+        /// <summary>
+        /// The reader.
+        /// </summary>
         private OracleDataReader reader;
 
+        /// <summary>
+        /// The either true or false that you return.
+        /// </summary>
         private bool returnbool;
-        // General comments:
-        // - Initialize returnvariables before the try (both declare and initialize) , and return them after the finally. 
-        // - Do not use reserved keywords for parameters. 
-        // - OracleException and Exception are interchangable: but OracleException shows the popup directly when it crashes. 
-        // - These example use the latest database from PTS2 as found on https://portal.fhict.nl/IS/S2/Lesmateriaal%20Reguliere%20stroom/OracleScripts_Camping.rar
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Databaseconnection"/> class.
+        /// </summary>
         public Databaseconnection()
         {
             this.connection = new OracleConnection
-            {
-                ConnectionString =
-                    "User Id=mark;Password=mark;Data Source=localhost/xe;"
-            };
-            //Connection string for Athena Oracle Database (Backup)
-            //this.connection.ConnectionString = "User Id=dbi304910;Password=drlc3PnAnP;Data Source=//192.168.15.50:1521/fhictora;";
-            //Connection string for Local Oracle Database
+                                  {
+                                      ConnectionString =
+                                          "User Id=mark;Password=mark;Data Source=localhost/xe;"
+                                  };
+
+            // Connection string for Athena Oracle Database (Backup)
+            // this.connection.ConnectionString = "User Id=dbi304910;Password=drlc3PnAnP;Data Source=//192.168.15.50:1521/fhictora;";
+            // Connection string for Local Oracle Database
         }
+
+        /// <summary>
+        /// Checks if login is good.
+        /// </summary>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <param name="passw">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool Checklogin(string username, string passw)
         {
             try
@@ -52,9 +85,19 @@
             {
                 this.connection.Close();
             }
+
             return this.returnbool;
         }
 
+        /// <summary>
+        /// The check register.
+        /// </summary>
+        /// <param name="user">
+        /// The user.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool CheckRegister(User user)
         {
             try
@@ -74,9 +117,16 @@
             {
                 this.connection.Close();
             }
+
             return this.returnbool;
         }
 
+        /// <summary>
+        /// The register.
+        /// </summary>
+        /// <param name="user">
+        /// The user.
+        /// </param>
         public void Register(User user)
         {
             try
@@ -100,6 +150,15 @@
             }
         }
 
+        /// <summary>
+        /// The update pass.
+        /// </summary>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <param name="passw">
+        /// The password.
+        /// </param>
         public void UpdatePass(string username, string passw)
         {
             try
@@ -121,6 +180,12 @@
             }
         }
 
+        /// <summary>
+        /// The get articles.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Article> GetArticles()
         {
             List<Article> articles = new List<Article>();
@@ -133,14 +198,13 @@
                 while (this.reader.Read())
                 {
                     var a = new Article
-                                    {
-                                        ID = Convert.ToInt32(this.reader["ID"]),
-                                        Title = Convert.ToString(this.reader["Title"]),
-                                        Body = Convert.ToString(this.reader["Bodyy"]),
-                                        Date = Convert.ToDateTime(this.reader["Releasedate"])
-                                    };
+                                {
+                                    ID = Convert.ToInt32(this.reader["ID"]), 
+                                    Title = Convert.ToString(this.reader["Title"]), 
+                                    Body = Convert.ToString(this.reader["Bodyy"]), 
+                                    Date = Convert.ToDateTime(this.reader["Releasedate"])
+                                };
                     articles.Add(a);
-
                 }
             }
             catch (OracleException e)
@@ -149,8 +213,9 @@
             }
             finally
             {
-               this.connection.Close();
+                this.connection.Close();
             }
+
             return articles;
         }
     }

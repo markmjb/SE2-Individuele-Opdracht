@@ -18,7 +18,7 @@ namespace Web_S2.Account
                 if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null)
                 {
                     UserName.Text = Request.Cookies["UserName"].Value;
-                    Password.Attributes["value"] = Request.Cookies["Password"].Value;
+                    tbPassword.Attributes["value"] = Request.Cookies["Password"].Value;
                 }
             }
         }
@@ -26,12 +26,12 @@ namespace Web_S2.Account
         protected void LogIn(object sender, EventArgs e)
         {
             
-            if (this.RememberMe.Checked == true)
+            if (this.RememberMe.Checked)
             {
                 Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
                 Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
                 Response.Cookies["UserName"].Value = UserName.Text;
-                Response.Cookies["Password"].Value = Password.Text;
+                Response.Cookies["Password"].Value = this.tbPassword.Text;
             }
             else
             {
@@ -44,7 +44,7 @@ namespace Web_S2.Account
 
             //Kijkt of de login gegevens juist zijn, als het true returnt dan logt de gebruiker in en wordt hij verwijst naar zijn profiel
             //zo niet dan krijgt hij een error message te zien.
-            if (this.databaseconnection.Checklogin(this.UserName.Text, this.Password.Text))
+            if (this.databaseconnection.Checklogin(this.UserName.Text, this.tbPassword.Text))
             {
                 this.Session["LoggedInUserName"] = this.UserName.Text;
                 this.Response.Redirect("~/Default.aspx");

@@ -1,17 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Products.aspx.cs" company="Software">
+//   Mark©
+// </copyright>
+// <summary>
+//   The web form 1.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Web_S2
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    using System;
+    using System.Web.UI;
+
+    /// <summary>
+    /// The web form 1.
+    /// </summary>
+    public partial class WebForm1 : Page
     {
+        /// <summary>
+        /// The page_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

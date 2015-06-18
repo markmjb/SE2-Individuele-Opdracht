@@ -22,10 +22,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="tbPassword" CssClass="col-md-2 control-label">Password</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
+                            <asp:TextBox runat="server" ID="tbPassword" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="tbPassword" CssClass="text-danger" ErrorMessage="The password field is required." />
                         </div>
                     </div>
                     <div class="form-group">
