@@ -10,19 +10,18 @@ using Business;
 
 namespace Web_S2.Account
 {
+    using Business = Business;
+
     public partial class Register : Page
     {
-        readonly Business.Databaseconnection databaseconnection = new Databaseconnection();
-
+       readonly Business.Business business = new Business.Business();
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             //Checkt op een uniek email en vervolgens, als dit kan maakt hij het aan en logt hij in.
-            if (databaseconnection.CheckRegister(new User(UserName.Text, Name.Text, Password.Text)))
+            if (this.business.CheckRegister(new User(this.UserName.Text, this.Name.Text, this.Password.Text)))
             {
-                databaseconnection.Register(new User(UserName.Text, Name.Text, Password.Text));
-                databaseconnection.Checklogin(UserName.Text, Password.Text);
-                if (true)
-                {
+                this.business.Register(new User(this.UserName.Text, this.Name.Text, this.Password.Text));
+               {
                     Session["LoggedInUserName"] = UserName.Text;
                     Response.Redirect("~/Default.aspx");
                 }

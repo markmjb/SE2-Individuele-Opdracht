@@ -10,10 +10,10 @@ namespace Web_S2.Account
 {
     public partial class Login : Page
     {
-        Business.Databaseconnection databaseconnection = new Databaseconnection();
+        readonly Business.Databaseconnection databaseconnection = new Databaseconnection();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!this.IsPostBack)
             {
                 if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null)
                 {
@@ -25,8 +25,8 @@ namespace Web_S2.Account
 
         protected void LogIn(object sender, EventArgs e)
         {
-            ///Check if remember me is checked, if so create cookies if not delete cookies
-            if (RememberMe.Checked == true)
+            
+            if (this.RememberMe.Checked == true)
             {
                 Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
                 Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
@@ -35,24 +35,24 @@ namespace Web_S2.Account
             }
             else
             {
-                if (Request.Cookies["UserName"] != null || Request.Cookies["Password"] != null)
+                if (this.Request.Cookies["UserName"] != null || this.Request.Cookies["Password"] != null)
                 {
-                    Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                    this.Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
+                    this.Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
                 }
             }
 
             //Kijkt of de login gegevens juist zijn, als het true returnt dan logt de gebruiker in en wordt hij verwijst naar zijn profiel
             //zo niet dan krijgt hij een error message te zien.
-            if (databaseconnection.Checklogin(UserName.Text, Password.Text))
+            if (this.databaseconnection.Checklogin(this.UserName.Text, this.Password.Text))
             {
-                Session["LoggedInUserName"] = UserName.Text;
-                Response.Redirect("~/Default.aspx");
+                this.Session["LoggedInUserName"] = this.UserName.Text;
+                this.Response.Redirect("~/Default.aspx");
             }
             else
             {
-                FailureText.Text = "Incorrecte login gegevens!";
-                ErrorMessage.Visible = true;
+                this.FailureText.Text = "Incorrecte login gegevens!";
+                this.ErrorMessage.Visible = true;
             }
         }
     }

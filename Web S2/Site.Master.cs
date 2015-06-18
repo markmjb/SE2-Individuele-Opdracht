@@ -45,30 +45,30 @@ namespace Web_S2
             Response.Redirect("~/Default.aspx");
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected void BtnSearchClick(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
         protected void Productpage_OnServerClick(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm1.aspx");
+            this.Response.Redirect("~/Products.aspx");
         }
 
         protected void Registerpage_OnServerClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Response.Redirect("~/Account/Register.aspx");
         }
 
         protected void Logging_OnServerClick(object sender, EventArgs e)
         {
             if (Logging.InnerText == "Sign Off")
             {
-                Session["LoggedInUserName"] = null;
-                Response.Redirect("~/Default.aspx");
+                this.Session["LoggedInUserName"] = null;
+                this.Response.Redirect("~/Default.aspx");
             }
-            else if (Logging.InnerText == "Log in")
+            else if (this.Logging.InnerText == "Log in")
             {
-                Response.Redirect("~/Account/Login.aspx");
+                this.Response.Redirect("~/Account/Login.aspx");
             }
         }
     }

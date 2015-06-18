@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Engadget</title>
-    <link rel="stylesheet" href="/Content/bootstrap.css.css" type="text/css" />
+    <link rel="stylesheet" href="/Content/bootstrap.css" type="text/css" />
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -54,7 +54,7 @@
                 <div class="col-md-4">
                     <div class="form-inline" style="padding-top:15px">
                     <asp:TextBox ID="tbSearch" runat="server" Width="150px" Height="30px" class="form-control"></asp:TextBox>
-                    <asp:Button ID="btnSearch" runat="server" Text="Search" Width="150px" Height="30px" class="btn btn-primary" OnClick="btnSearch_Click"/>
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" Width="150px" Height="30px" class="btn btn-primary" OnClick="BtnSearchClick"/>
                     </div>
                 </div>
 
@@ -69,13 +69,13 @@
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder><asp:ContentPlaceHolder runat="server" ID="FeaturedContent"></asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Bol.com</p>
+                <p>&copy; <%: DateTime.Now.Year %> -Engadget</p>
             </footer>
         </div>
-    </form>
-<asp:ContentPlaceHolder runat="server" ID="FeaturedContent"></asp:ContentPlaceHolder>
-</body>
+            </form>
+    
+    </body>
 </html>

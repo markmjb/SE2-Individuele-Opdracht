@@ -10,24 +10,24 @@ namespace Web_S2.Account
 
     public partial class Manage : System.Web.UI.Page
     {
-        Databaseconnection databaseconnection = new Databaseconnection();
+        readonly Business business = new Business();
 
         protected void Page_Load()
         {
-              lblPass.Visible = false;
+              this.lblPass.Visible = false;
             
 
         }
         protected void Changepass(object sender, EventArgs e)
         {
-            if (databaseconnection.Checklogin((string)Session["LoggedInUserName"], Password.Text))
+            if (this.business.Checklogin((string)this.Session["LoggedInUserName"], this.Password.Text))
             {
-                lblPass.Visible = false;
-                databaseconnection.UpdatePass((string)Session["LoggedInUserName"], TextBox1.Text);
+                this.lblPass.Visible = false;
+                this.business.UpdatePass((string)this.Session["LoggedInUserName"], this.TextBox1.Text);
             }
             else
             {
-                lblPass.Visible = true;
+                this.lblPass.Visible = true;
             }
         }
     }
